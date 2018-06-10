@@ -1,0 +1,16 @@
+<h2>detail corsi</h2>
+
+
+<fieldset id="{{stati.nome}}">
+        <legend>{{stati.nome}}</legend>
+      
+          <li>{{ stati.id }}</li>
+          <li>{{ stati.nome }}</li>
+          <ul ng-repeat="stCitta in stati.citta">
+            <li>id > {{ stCitta.id }}</li>
+            <li>nome citta  > {{ stCitta.nome }}</li>
+            <li>abitanti > {{ stCitta.abitanti }}</li>
+            <li></li>
+          </ul>
+      
+      </fieldset>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My AngularJS App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="angular.js"></script>
+</head>
+
+<body ng-app="MyModule">
+<style>
+
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+</style>
+    
+<div ng-controller="MyController"> 
+
+    <input type="text" ng-model="green">
+    <p>{{ country.name }}</p>
+    <p>{{green}}</p>
+
+    <p>nome: {{ country.name }}</p>
+    <p>capital: {{ country.capital }}</p>
+    <img src="{{ country.flag }}" alt="{{ country.name + ' Flag' }}">
+    
+</div>
+
+<hr></hr>
+
+<div ng-controller="CityController">
+  
+        <ul ng-repeat="stati in countries">
+            <li>{{ stati.name }} -  {{$index}}</li>
+            <ul>
+                <li ng-repeat="city in stati.cities">
+                    {{ city.name }} - {{$index}}
+                    <ul>
+                        <li ng-repeat="pro in city.pro">
+                                {{ pro.test }}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </ul>
+    
+    </div>
+
+
+<hr></hr>
+
+
+<div ng-controller="LikeCrt">
+
+     <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Likes</th>
+                    <th>Dislikes</th>
+                    <th>Like/Dislike</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="technology in technologies">
+                    <td> {{ technology.name }} </td>
+                    <td> {{ technology.likes }} </td>
+                    <td> {{ technology.dislikes }} </td>
+                    <td>
+                        <input type="button" ng-click="incrementLike(technology)"  value="likes">
+                        <input type="button" ng-click="incrementDsLike(technology)"  value="dislikes">
+                        <input type="button" ng-click="decrementLike(technology)"  value="dislikes">
+                    </td>
+                </tr>
+            </tbody>
+     </table>
+
+</div>
+
+<p></p>
+<hr></hr>
+<p>
+</p>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+  .box {
+    display: block;
+    font-size: 15px;
+    height: 350px;
+    width: 400px;
+    border: 1px solid black;
+    padding: 10px;
+    overflow-y: scroll;
+}
+</style>
+<body ng-app="myModule">
+
+<div ng-controller="myController">
+    
+    <input type="text" ng-model="cerca">
+
+    <select name="" id="" ng-model="technologiesView">
+    <option value="views/tecnologyView.html">tab uno</option>
+    <option value="views/tecnologyTh.html">tab deu</option>
+    </select>
+    <div ng-include="technologiesView"></div>
+</div>
+
+
+<div ng-controller="myRest">
+
+  <ul ng-repeat="utente in utenti">
+    <li>{{ utente.nome }}</li>
+    <li>{{ utente.eta }}</li>
+    <ul ng-repeat="ut in utente.case.proprieta">
+      <li>{{ ut }}</li>
+    </ul>
+  </ul>
+
+</div>
+
+<hr></hr>
+
+
+<div ng-controller="myString">
+
+  <input type="text" ng-model="input"><br>
+  <input type="text" ng-model="output"><br>
+  <input type="button" value="invia" ng-click="transformString(input)">
+
+</div>
+
+<div ng-controller="myServizio">
+ 
+  <input type="text" ng-model="input"><br>
+  <p>{{ output }}</p>
+
+  <input type="button" value="invia" ng-click="emailV(input)">
+
+</div>
+
+<hr>
+
+<div class="box" ng-controller="myRestStati">
+<span ng-repeat="st in stati">
+    <button ng-click="scrollTo(st.nome)">{{st.nome}}</button>
+</span>
+ 
+<fieldset ng-repeat="st in stati" id="{{st.nome}}">
+  <legend>{{st.nome}}</legend>
+
+    <li>{{ st.id }}</li>
+    <li>{{ st.nome }}</li>
+    <ul ng-repeat="stCitta in st.citta">
+      <li>id > {{ stCitta.id }}</li>
+      <li>nome citta  > {{ stCitta.nome }}</li>
+      <li>abitanti > {{ stCitta.abitanti }}</li>
+      <li></li>
+    </ul>
+
+</fieldset>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="scripts/test.js"></script>
+<script src="scripts/stringService.js"></script>
+<script src="scripts/emailService.js"></script>
+</body>
+</html>

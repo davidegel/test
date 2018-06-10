@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      line-height: 1.25;
+    }
+    table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      table-layout: fixed;
+    }
+    table caption {
+      font-size: 1.5em;
+      margin: .5em 0 .75em;
+    }
+    table tr {
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: .35em;
+    }
+    table th,
+    table td {
+      padding: .625em;
+      text-align: center;
+    }
+    table th {
+      font-size: .85em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    @media screen and (max-width: 600px) {
+      table {
+        border: 0;
+      }
+      table caption {
+        font-size: 1.3em;
+      }
+      table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+      }
+      table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+      }
+      table td:before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      table td:last-child {
+        border-bottom: 0;
+      }
+    }
+</style>
+    
+
+<body ng-app="myModule">
+
+<input type="checkbox" name="" id="" ng-model="hide">
+
+Rows to display : <input type="number" step="1"
+ ng-model="rowCount" max="5" min="0" />
+
+ Sort By :
+ <select ng-model="sortColumn">
+     <option value="name">Name ASC</option>
+     <option value="+dateOfBirth">Date of Birth ASC</option>
+     <option value="+gender">Gender ASC</option>
+     <option value="-salary">Salary DESC</option>
+     <option value="+salary">Salary ASC</option>
+ </select>
+
+ Search : <input type="text" placeholder="Search gender e name"
+ ng-model="searchText" />
+
+ Input: <input ng-model="greeting" type="text"><br>
+
+    <div ng-controller="TabellaDinamica">
+         
+            <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date of Birth</th>
+                            <th>Gender</th>
+                            <th>Salary (number filter)</th>
+                            <th ng-show="hide">Salary (currency filter)</th>
+                            <th ng-hide="hide">Salary (currency filter)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="employee in employees | limitTo:rowCount | orderBy:sortColumn | filter: search">
+                        <td> {{ employee.name | uppercase }} | <a href="" ng-click="funzioneClik(employee)" >fn function</a></td>
+                        <td> {{ employee.dateOfBirth | date:"dd/MM/yyyy" }} </td>
+                        <td> {{ employee.gender | gender }} </td>
+                        <td> {{ employee.salary | number:2 }} </td>
+                        <td ng-show="hide"> ############# </td>
+                        <td ng-hide="hide"> {{ employee.salary | currency : "£" : 1 }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                Reverse: {{greeting|reverse}}<br>
+    
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+            <script src="script/tabella.js"></script>
+</body>
+</html>
